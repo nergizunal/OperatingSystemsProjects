@@ -17,3 +17,24 @@ block.
 ● There is also one general header at the beginning of whole memory chunk for
 indicating the situation of it
 
+In app.c, the program allocates 6 blocks with size of (chunksize in kb) *16 byte, for
+every allocation method these blocks allocated consecutively. And then the program
+frees second, third and fifth blocks.
+
+|----------|----------|----------|----------|----------|----------|-------------------|
+
+Alloc         Free          Free      Alloc       Free       Alloc        Free
+
+And then the program creates 6 threads for allocating memory with size of
+(chunksize in kb) *8, this scenario gives different results for every different allocation
+algorithms. You can see how these 3 algorithms allocate memory by outputs given
+above.
+
+
+INTERPRETATION OF RESULTS
+First fit algorithm is the fastest algorithm among them because it does searching in
+less number of time for free space.
+Although best fit algorithm has advantage on memory utilization, it has disadvantage
+on timing because it searches more.
+Last but not the least, worst fit aims reducing the ratio of small gaps, and due to this,
+it has similar timing results with first fit.
